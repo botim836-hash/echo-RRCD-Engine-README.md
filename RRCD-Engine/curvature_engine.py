@@ -112,11 +112,11 @@ class CurvatureEngine:
             
         Returns:
             Tuple of (max_curvature_value, index_in_path)
+            
+        Raises:
+            ValueError: If less than 3 points are provided
         """
         curvatures = self.calculate_curvature(points)
-        if not curvatures:
-            return (0.0, -1)
-        
         max_curv = max(curvatures)
         max_idx = curvatures.index(max_curv) + 1  # +1 because first point has no curvature
         
@@ -131,11 +131,11 @@ class CurvatureEngine:
             
         Returns:
             Average curvature value
+            
+        Raises:
+            ValueError: If less than 3 points are provided
         """
         curvatures = self.calculate_curvature(points)
-        if not curvatures:
-            return 0.0
-        
         return round(sum(curvatures) / len(curvatures), self.precision)
     
     def is_straight(self, points: List[Tuple[float, float]], 
